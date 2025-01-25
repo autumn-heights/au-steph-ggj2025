@@ -52,18 +52,6 @@ func init_random_painting(scene):
 		n = "NoName"
 	else:
 		n = possibleNames.pop_at(randi() % (possibleNames.size()-1)) ## pops a name from the list at a random point in the list
-	#var dict = {"name": n, "filename": "400px-vangogh-portrait-of-doctor-gachet.png"}
-	
-	#var dict = {
-		#"number": 2,
-		#"filename": "400px-davinci-salvator-mundi.png",
-		#"title": "Salvator Mundi",
-		#"artist": "Leonardo Da Vinci", 
-		#"year": "1892",
-		#"description": "",
-		#"ownership": "Mohammad Bin Salman, Crown Prince of Saudi Arabia",
-		#"value": 450000000
-	#}
 	
 	var dict = possiblePaintingParams.pop_at(randi() % (possiblePaintingParams.size()-1))
 	print(dict)
