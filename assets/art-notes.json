@@ -67,13 +67,24 @@
     
     {
         "number": 7,
-        "filename": "400px-raphael-bridgewater-madonna.png",
-        "title": "Bridgewater Madonna",
-        "artist": "Raphael", 
-        "year": "1890",
+        "filename": "400px-caravaggio-martyrdom-of-st-ursula.png",
+        "title": "Caravaggio",
+        "artist": "Martydom of St Ursula", 
+        "year": "1234",
         "description": "",
         "ownership": "",
-        "value": 300000000
+        "value": 23455
+    },
+    
+    {
+        "number": 8,
+        "filename": "400px-matisse-the-idol.png",
+        "title": "Matisse",
+        "artist": "The Idol", 
+        "year": "1234",
+        "description": "",
+        "ownership": "",
+        "value": 45368763472
     }
     
 ]
