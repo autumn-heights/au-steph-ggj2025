@@ -4,6 +4,10 @@ extends StaticBody3D
 @onready var myCollider = $CollisionShape3D
 @onready var myPlaque = $MeshInstance3D
 
+
+
+
+var paintingsFolder = "res://Assets/Textures/Paintings/"
 var myOwner = "":
 	set(mo):
 		myOwner = mo
@@ -11,13 +15,21 @@ var myOwner = "":
 			var new_text = TextMesh.new()
 			new_text.text = mo
 			myPlaque.mesh=new_text
+var myPainter
+var myYear
+var my
 
 func setup(newDict) -> void:
 	for key in newDict.keys():
 		match key:
 			"name": myOwner = newDict[key]
+			"painter": myPainter = newDict[key]
+			"path": set_tex(paintingsFolder + newDict[key])
 
-func _ready() -> void:
+
+
+func set_tex(p = "res://icon.svg"):
+	mySprite.texture = load(p)
 	## set the collider
 	var spriteRect = mySprite.get_item_rect()
 	var shape = BoxShape3D.new() ## make a new shape for the painting
@@ -26,4 +38,6 @@ func _ready() -> void:
 	print(shape)
 	print(spriteRect)
 	myCollider.shape = shape ##sets the collider shape to be the new shape
-	## set the owner of the painting
+
+func _ready() -> void:
+	set_tex()
