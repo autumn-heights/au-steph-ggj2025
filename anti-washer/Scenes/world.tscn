@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://jjyexa5gehjx"]
+
+[ext_resource type="Script" path="res://Scenes/world.gd" id="1_8yon7"]
+[ext_resource type="PackedScene" uid="uid://c2captk44cbs3" path="res://Scenes/painting_scene.tscn" id="1_tplak"]
+[ext_resource type="Script" path="res://Scenes/player_manager.gd" id="3_o84ng"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_wtl2j"]
+radius = 0.01
+height = 0.02
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j1i0o"]
+albedo_color = Color(1, 0.27451, 1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_b4u2n"]
+size = Vector2(1.91, 6.275)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_211je"]
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_8yon7")
+
+[node name="PaintingScene" parent="." instance=ExtResource("1_tplak")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+
+[node name="PlayerManager" type="Node3D" parent="."]
+script = ExtResource("3_o84ng")
+
+[node name="Camera3D" type="Camera3D" parent="PlayerManager"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerManager"]
+mesh = SubResource("SphereMesh_wtl2j")
+surface_material_override/0 = SubResource("StandardMaterial3D_j1i0o")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.80613, 0)
+mesh = SubResource("PlaneMesh_b4u2n")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -3.0441)
+mesh = SubResource("PlaneMesh_211je")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
