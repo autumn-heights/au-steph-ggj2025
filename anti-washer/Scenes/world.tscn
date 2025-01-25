@@ -1,42 +1,113 @@
-[gd_scene load_steps=8 format=3 uid="uid://jjyexa5gehjx"]
+[gd_scene load_steps=10 format=3 uid="uid://jjyexa5gehjx"]
 
 [ext_resource type="Script" path="res://Scenes/world.gd" id="1_8yon7"]
 [ext_resource type="PackedScene" uid="uid://c2captk44cbs3" path="res://Scenes/painting_scene.tscn" id="1_tplak"]
 [ext_resource type="Script" path="res://Scenes/player_manager.gd" id="3_o84ng"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_wtl2j"]
-radius = 0.01
-height = 0.02
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j1i0o"]
-albedo_color = Color(1, 0.27451, 1, 1)
+[ext_resource type="PackedScene" uid="uid://dneogfc76ji00" path="res://aimer.tscn" id="4_7jau8"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_b4u2n"]
-size = Vector2(1.91, 6.275)
+size = Vector2(2, 6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w6fjv"]
+size = Vector3(8, 2, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_211je"]
+size = Vector2(8, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j2kto"]
+size = Vector3(6, 2, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_0o8by"]
+size = Vector2(6, 2)
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_8yon7")
 
 [node name="PaintingScene" parent="." instance=ExtResource("1_tplak")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.8)
 
 [node name="PlayerManager" type="Node3D" parent="."]
 script = ExtResource("3_o84ng")
 
 [node name="Camera3D" type="Camera3D" parent="PlayerManager"]
+transform = Transform3D(1, 0, 0, 0, 0.996464, 0.0840257, 0, -0.0840257, 0.996464, 0, 0.2007, 0.281739)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerManager"]
-mesh = SubResource("SphereMesh_wtl2j")
-surface_material_override/0 = SubResource("StandardMaterial3D_j1i0o")
+[node name="Aimer" parent="PlayerManager" instance=ExtResource("4_7jau8")]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.80613, 0)
 mesh = SubResource("PlaneMesh_b4u2n")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -3.0441)
-mesh = SubResource("PlaneMesh_211je")
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.912299, -0.197797, 0.35859, 0, 0.875625, 0.482992, -0.409525, -0.440633, 0.798832, 0, 0, 0)
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_w6fjv")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.5)
+mesh = SubResource("PlaneMesh_211je")
+skeleton = NodePath("../..")
+
+[node name="WallR" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.5, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WallR"]
+shape = SubResource("BoxShape3D_j2kto")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="WallR"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.5)
+mesh = SubResource("PlaneMesh_0o8by")
+skeleton = NodePath("../..")
+
+[node name="WallL" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.5, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WallL"]
+shape = SubResource("BoxShape3D_j2kto")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="WallL"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.5)
+mesh = SubResource("PlaneMesh_0o8by")
+skeleton = NodePath("../..")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -364.0
+offset_top = -359.0
+offset_right = 148.0
+offset_bottom = 153.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.7, 0.7)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer"]
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+transform = Transform3D(0.116099, -4.34158e-08, 0.993238, -0.993238, -5.07483e-09, 0.116099, 0, -1, -4.37114e-08, 3.87251, -0.636953, -1.51149)

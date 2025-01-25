@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://dneogfc76ji00"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_wtl2j"]
+radius = 0.05
+height = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j1i0o"]
+transparency = 1
+albedo_color = Color(1, 0.27451, 0.0980392, 0.768627)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_xyhhx"]
+radius = 0.05
+height = 0.4
+
+[node name="Aimer" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_wtl2j")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_j1i0o")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.4, 0, 0)
+mesh = SubResource("CapsuleMesh_xyhhx")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_j1i0o")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -0.4, 0, 0)
+mesh = SubResource("CapsuleMesh_xyhhx")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_j1i0o")

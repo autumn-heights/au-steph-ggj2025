@@ -1,7 +1,7 @@
 extends Node3D
 
 @onready var paintingScene = $PaintingScene
-@onready var menu
+@onready var menu = $Panel
 var possibleNames = [
   "Ethan B. Harrington",
   "Isla M. Donovan",
@@ -27,18 +27,20 @@ var possibleNames = [
 
 func _ready() -> void:
 	show_menu()
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_menu"): ##escape pressed
 		show_menu()
 
 func show_menu():
-	return
 	menu.visible = !menu.visible #show/hide menu
 	if menu.visible:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		menu.mouse_filter
+		menu.mouse_filter = Control.MOUSE_FILTER_STOP
 	else:
 		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+		menu.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 # Called when the node enters the scene tree for the first time.
 func new_painting():
