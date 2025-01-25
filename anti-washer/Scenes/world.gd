@@ -25,9 +25,12 @@ var possibleNames = [
   "Victoria N. Harrison"
 ]
 
+var possiblePaintingParams = readJSON("res://Assets/art-notes.json")
+
 func _ready() -> void:
 	show_menu()
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+	init_random_painting(paintingScene)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_menu"): ##escape pressed
@@ -43,11 +46,34 @@ func show_menu():
 		menu.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 # Called when the node enters the scene tree for the first time.
-func new_painting():
+func init_random_painting(scene):
 	var n
 	if possibleNames.is_empty():
 		n = "NoName"
 	else:
 		n = possibleNames.pop_at(randi() % (possibleNames.size()-1)) ## pops a name from the list at a random point in the list
-	var dict = {"name": n}
-	paintingScene.setup(dict)
+	#var dict = {"name": n, "filename": "400px-vangogh-portrait-of-doctor-gachet.png"}
+	
+	#var dict = {
+		#"number": 2,
+		#"filename": "400px-davinci-salvator-mundi.png",
+		#"title": "Salvator Mundi",
+		#"artist": "Leonardo Da Vinci", 
+		#"year": "1892",
+		#"description": "",
+		#"ownership": "Mohammad Bin Salman, Crown Prince of Saudi Arabia",
+		#"value": 450000000
+	#}
+	
+	var dict = possiblePaintingParams.pop_at(randi() % (possiblePaintingParams.size()-1))
+	print(dict)
+	scene.setup(dict)
+
+
+func readJSON(json_file_path):
+	# stolen from reddit
+	var file = FileAccess.open(json_file_path, FileAccess.READ)
+	var content = file.get_as_text()
+	var json = JSON.new()
+	var finish = json.parse_string(content)
+	return finish
