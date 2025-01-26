@@ -33,7 +33,7 @@ var max_sponges = 10
 
 
 var possiblePaintingParams = readJSON("res://Assets/art-notes.json")
-var scene_size = Vector2(6, 8)
+var scene_size = Vector2(8,6)
 func _ready() -> void:
 	sponge_manager.max_sponges = max_sponges
 	for walker in get_tree().get_nodes_in_group("Walker"):
@@ -63,10 +63,11 @@ func show_menu():
 		menu.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 func get_destination(requester = null):
-	print("giving a destination to " + requester.to_string())
-	var x = (randf() - 0.5) * scene_size.x * 2
-	var z = (randf() - 0.5) * scene_size.y * 2
+	#print("giving a destination to " + requester.to_string())
+	var x = randf_range(-scene_size.x + 0.5, scene_size.x -0.5) *0.5
+	var z = randf_range(-scene_size.y + 0.5, scene_size.y -0.5) *0.5
 	var pos = Vector3(x, requester.position.y, z) ## setting the y to be the same as the requestor to prevent floating /sinking behaviour
+	#print("new position for walker ", pos)
 	if requester != null: requester.destination = pos
 	else: return pos
 	
