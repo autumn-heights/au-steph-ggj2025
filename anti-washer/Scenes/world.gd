@@ -26,7 +26,7 @@ var possibleNames = [
 ]
 
 var possiblePaintingParams = readJSON("res://Assets/art-notes.json")
-
+var scene_size = Vector2(6, 8)
 func _ready() -> void:
 	show_menu()
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
@@ -44,7 +44,11 @@ func show_menu():
 	else:
 		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 		menu.mouse_filter = Control.MOUSE_FILTER_IGNORE
-
+func give_destination(requester):
+	var x = (randf() - 0.5) * scene_size.x * 2
+	var z = (randf() - 0.5) * scene_size.y * 2
+	var pos = Vector3(x, 0, z)
+	requester.destination = pos
 # Called when the node enters the scene tree for the first time.
 func init_random_painting(scene):
 	var n

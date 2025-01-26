@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://cftdclwg8sf6p"]
+
+[ext_resource type="Script" path="res://Scenes/walker.gd" id="1_uhm6l"]
+[ext_resource type="Texture2D" uid="uid://c01csyxo3c1mh" path="res://Assets/Textures/Walking People/400px-pedestrian-7.png" id="2_oibnk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qeg1n"]
+size = Vector3(0.951212, 1.9, 0.546387)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gex4d"]
+
+[node name="Walker" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_uhm6l")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+pixel_size = 0.005
+texture = ExtResource("2_oibnk")
+
+[node name="HitArea" type="StaticBody3D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.054479, 0, 0)
+shape = SubResource("BoxShape3D_qeg1n")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_gex4d")

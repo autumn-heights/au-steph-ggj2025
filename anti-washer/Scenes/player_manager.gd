@@ -3,15 +3,15 @@ extends Node3D
 const RAY_LENGTH = 100
 @onready var hitMarker = $Aimer
 @onready var sponge = preload("res://Scenes/sponge.tscn")
-@onready var playerHands 
+@onready var playerHands = $AnimatedSprite3D
 var lastHit
 var tween : Tween
 var state: STATES = STATES.Idle
 enum STATES {Idle, Aiming}
 var raise_time = 0.3
 var lower_time = 0.3
-var topHPos
-var botHPos
+var topHPos = Vector3(-0.814, -0.631, 0)
+var botHPos = Vector3(-0.814, -1.2, 0.042)
 
 func _physics_process(delta: float) -> void:
 	var hit = raycast()

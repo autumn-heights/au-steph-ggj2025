@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://cux68v5cosdhy"]
+
+[ext_resource type="Script" path="res://Scenes/player_manager.gd" id="1_0jxqh"]
+[ext_resource type="PackedScene" uid="uid://dneogfc76ji00" path="res://aimer.tscn" id="2_bb3jk"]
+[ext_resource type="Texture2D" uid="uid://d1x5exix0jkyc" path="res://Assets/Textures/Hands/400px-hand-idle.png" id="3_dy6tt"]
+[ext_resource type="Texture2D" uid="uid://quignstpxp3b" path="res://Assets/Textures/Hands/400px-hand-cocked.png" id="4_251qe"]
+[ext_resource type="Texture2D" uid="uid://bii8fvb55rv15" path="res://Assets/Textures/Hands/400px-hand-thrown.png" id="5_qcktl"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_urkx3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_dy6tt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_251qe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_qcktl")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="PlayerManager" type="Node3D"]
+script = ExtResource("1_0jxqh")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.996464, 0.0840257, 0, -0.0840257, 0.996464, 0, 0.2007, 1.21072)
+
+[node name="Aimer" parent="." instance=ExtResource("2_bb3jk")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.813982, -0.785137, 0.441513)
+pixel_size = 0.002
+sprite_frames = SubResource("SpriteFrames_urkx3")
+frame = 2
+frame_progress = 1.0
