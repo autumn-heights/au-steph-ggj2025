@@ -2,6 +2,8 @@ extends Node3D
 
 @onready var paintingScene = $PaintingScene
 @onready var menu = $Panel
+
+@onready var walker_scene = preload("res://Scenes/walker.tscn")
 var possibleNames = [
   "Ethan B. Harrington",
   "Isla M. Donovan",
@@ -28,9 +30,18 @@ var possibleNames = [
 var possiblePaintingParams = readJSON("res://Assets/art-notes.json")
 var scene_size = Vector2(6, 8)
 func _ready() -> void:
+	for walker in get_tree().get_nodes_in_group("Walker"):
+		walker.new_destination.connect(get_destination.bind(walker)) ## connects the new_destination signal
+		# from walker nodes in scene tree to the get_destination function
 	show_menu()
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	init_random_painting(paintingScene)
+
+func create_walker():
+	var new = walker_scene.instantiate(PackedScene.GEN_EDIT_STATE_DISABLED)
+	new.position = get_destination()
+	new.destination = get_destination()
+	get_tree().get_root().add_child(new)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_menu"): ##escape pressed
@@ -44,11 +55,15 @@ func show_menu():
 	else:
 		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 		menu.mouse_filter = Control.MOUSE_FILTER_IGNORE
-func give_destination(requester):
+
+func get_destination(requester = null):
+	print("giving a destination to " + requester.to_string())
 	var x = (randf() - 0.5) * scene_size.x * 2
 	var z = (randf() - 0.5) * scene_size.y * 2
-	var pos = Vector3(x, 0, z)
-	requester.destination = pos
+	var pos = Vector3(x, requester.position.y, z) ## setting the y to be the same as the requestor to prevent floating /sinking behaviour
+	if requester != null: requester.destination = pos
+	else: return pos
+	
 # Called when the node enters the scene tree for the first time.
 func init_random_painting(scene):
 	var n

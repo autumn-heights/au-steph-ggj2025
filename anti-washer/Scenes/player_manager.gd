@@ -3,15 +3,17 @@ extends Node3D
 const RAY_LENGTH = 100
 @onready var hitMarker = $Aimer
 @onready var sponge = preload("res://Scenes/sponge.tscn")
-@onready var playerHands = $AnimatedSprite3D
+@onready var playerHands = $Hand
+@onready var sponge_mesh = $Hand/SpongeMesh
 var lastHit
 var tween : Tween
 var state: STATES = STATES.Idle
 enum STATES {Idle, Aiming}
 var raise_time = 0.3
 var lower_time = 0.3
-var topHPos = Vector3(-0.814, -0.631, 0)
-var botHPos = Vector3(-0.814, -1.2, 0.042)
+var topHPos = Vector3(-0.8, -0.6, 0)
+var botHPos = Vector3(-0.8, -1.2, 0)
+
 
 func _physics_process(delta: float) -> void:
 	var hit = raycast()
@@ -26,9 +28,10 @@ var can_throw = true
 
 func throw_sponge(start, end):
 	var new = sponge.instantiate(PackedScene.GEN_EDIT_STATE_DISABLED)
-	new.position = global_position
+	new.position = sponge_mesh.global_position
+	new.rotation = sponge_mesh.global_rotation
 	get_tree().get_root().add_child(new)
-	new.start = global_position
+	new.start = sponge_mesh.global_position
 	new.end = end
 
 func _unhandled_input(event: InputEvent) -> void:

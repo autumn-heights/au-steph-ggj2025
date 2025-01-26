@@ -1,0 +1,366 @@
+[gd_scene load_steps=19 format=3 uid="uid://cux68v5cosdhy"]
+
+[ext_resource type="Script" path="res://Scenes/player_manager.gd" id="1_0jxqh"]
+[ext_resource type="PackedScene" uid="uid://dneogfc76ji00" path="res://aimer.tscn" id="2_bb3jk"]
+[ext_resource type="Texture2D" uid="uid://d1x5exix0jkyc" path="res://Assets/Textures/Hands/400px-hand-idle.png" id="3_dy6tt"]
+[ext_resource type="Shader" path="res://Scenes/HandMasking.gdshader" id="3_yonr4"]
+[ext_resource type="Texture2D" uid="uid://quignstpxp3b" path="res://Assets/Textures/Hands/400px-hand-cocked.png" id="4_251qe"]
+[ext_resource type="Texture2D" uid="uid://bii8fvb55rv15" path="res://Assets/Textures/Hands/400px-hand-thrown.png" id="5_qcktl"]
+[ext_resource type="Texture2D" uid="uid://c8sac3ooj4vp7" path="res://Assets/Textures/Hands/400px-hand-followthrough.png" id="6_2aqxq"]
+[ext_resource type="ArrayMesh" uid="uid://c1iutrs5g561" path="res://Assets/Meshes/Sponge_Mesh.res" id="6_cmla1"]
+[ext_resource type="Texture2D" uid="uid://dx7co5udmns7l" path="res://Assets/Textures/Hands/ATLAS_400px-hand-idle.png" id="6_hw5r2"]
+[ext_resource type="Texture2D" uid="uid://d3wr88s1sc3je" path="res://Assets/Textures/Hands/ATLAS_400px-hand-cocked.png" id="8_0nedy"]
+
+[sub_resource type="Animation" id="Animation_1ooay"]
+resource_name = "Fire"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hand/BaseHand:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [&"default", &"default"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hand/SpongeMesh:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector3(0.279657, 0.16008, -0.14671), Vector3(0.0795346, 0.16008, -0.14671)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hand/SpongeMesh:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector3(0.509418, -1.54747, -1.34463), Vector3(0.0421606, -1.72877, -1.71555)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hand/SpongeMesh:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector3(0.15, 0.15, 0.15), Vector3(0.205, 0.205, 0.205)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Hand/BaseHand:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(-0.0333, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Hand/HandOverlay:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.6993, 0.999),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Hand/HandOverlay:animation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [&"default", &"default"]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Hand/SpongeMesh:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_661k4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hand/BaseHand:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"default"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hand/SpongeMesh:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.279657, 0.16008, -0.14671)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hand/SpongeMesh:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.509418, -1.54747, -1.34463)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hand/SpongeMesh:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.15, 0.15, 0.15)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Hand/BaseHand:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Hand/HandOverlay:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Hand/HandOverlay:animation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"default"]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Hand/SpongeMesh:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_lx33y"]
+resource_name = "Reload"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hand/SpongeMesh:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.279657, 0.16008, -0.14671)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hand/SpongeMesh:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.509418, -1.54747, -1.34463)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hand/SpongeMesh:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.15, 0.15, 0.15)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hand/SpongeMesh:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.4, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xxwqx"]
+_data = {
+"Fire": SubResource("Animation_1ooay"),
+"RESET": SubResource("Animation_661k4"),
+"Reload": SubResource("Animation_lx33y")
+}
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_urkx3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_dy6tt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_251qe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_qcktl")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_2aqxq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_dy6tt")
+}],
+"loop": true,
+"name": &"reload",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rb4f1"]
+atlas = ExtResource("8_0nedy")
+region = Rect2(0, 0, 290, 400)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tt32o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_hw5r2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rb4f1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_qcktl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_hw5r2")
+}],
+"loop": true,
+"name": &"reload",
+"speed": 5.0
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s4xe7"]
+render_priority = 0
+shader = ExtResource("3_yonr4")
+
+[node name="PlayerManager" type="CharacterBody3D"]
+script = ExtResource("1_0jxqh")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.996464, 0.0840257, 0, -0.0840257, 0.996464, 0, 0.2007, 1.21072)
+current = true
+
+[node name="Aimer" parent="." instance=ExtResource("2_bb3jk")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xxwqx")
+}
+
+[node name="Hand" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, -0.6, 0)
+
+[node name="BaseHand" type="AnimatedSprite3D" parent="Hand"]
+pixel_size = 0.002
+render_priority = -1
+sprite_frames = SubResource("SpriteFrames_urkx3")
+
+[node name="HandOverlay" type="AnimatedSprite3D" parent="Hand"]
+process_priority = 2
+pixel_size = 0.002
+render_priority = 1
+sprite_frames = SubResource("SpriteFrames_tt32o")
+
+[node name="SpongeMesh" type="MeshInstance3D" parent="Hand"]
+process_priority = -1
+transform = Transform3D(0.0720526, -0.0129895, -0.130919, -0.127619, 0.0293653, -0.0731503, 0.0319643, 0.146523, 0.00305422, 0.279657, 0.16008, -0.14671)
+material_overlay = SubResource("ShaderMaterial_s4xe7")
+mesh = ExtResource("6_cmla1")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
