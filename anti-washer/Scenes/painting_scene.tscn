@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://c2captk44cbs3"]
 
 [ext_resource type="Script" path="res://Scenes/painting_scene.gd" id="1_bh3of"]
-[ext_resource type="Texture2D" uid="uid://dewaslpoaq10l" path="res://Assets/Textures/Paintings/400px-caravaggio-martyrdom-of-st-ursula.png" id="2_avmr1"]
+[ext_resource type="Texture2D" uid="uid://bt6ua6wwp8smv" path="res://Assets/Textures/Paintings/400px-caravaggio-martyrdom-of-st-ursula.png" id="2_avmr1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hfj2q"]
 size = Vector3(1, 1, 0.367676)

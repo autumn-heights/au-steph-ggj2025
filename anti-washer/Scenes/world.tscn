@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://jjyexa5gehjx"]
+[gd_scene load_steps=16 format=3 uid="uid://jjyexa5gehjx"]
 
 [ext_resource type="Script" path="res://Scenes/world.gd" id="1_8yon7"]
 [ext_resource type="PackedScene" uid="uid://c2captk44cbs3" path="res://Scenes/painting_scene.tscn" id="1_tplak"]
@@ -25,6 +25,12 @@ size = Vector2(8, 6)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ypamk"]
 size = Vector3(8, 1, 6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2fued"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_uaqj7"]
+horizontal_alignment = 0
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_8yon7")
@@ -121,6 +127,11 @@ shape = SubResource("BoxShape3D_ypamk")
 transform = Transform3D(1, 0, 0, 0, 0.0137004, 0.999906, 0, -0.999906, 0.0137004, 0, 4.67511, 0)
 
 [node name="SpongeManager" parent="CanvasLayer" instance=ExtResource("4_xeb68")]
+
+[node name="GameOverMessage" type="MeshInstance3D" parent="CanvasLayer/SpongeManager"]
+material_override = SubResource("StandardMaterial3D_2fued")
+mesh = SubResource("TextMesh_uaqj7")
+skeleton = NodePath("../../..")
 
 [node name="Walker" parent="." instance=ExtResource("5_r2c3f")]
 transform = Transform3D(0.595, 0, 0, 0, 0.595, 0, 0, 0, 0.595, -2.40161, -0.35322, -0.597205)

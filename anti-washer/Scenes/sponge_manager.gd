@@ -4,6 +4,7 @@ var max_sponges = 10
 var current_sponges
 @onready var spongeHolder = $VBoxContainer/HBoxContainer
 @onready var spongeCountLabel = $VBoxContainer/Label
+@onready var myGameOverMessage = $GameOverMessage
 var spongeTexPath = "res://Assets/Textures/Sponge-pixart.png"
 var spongeTex: 
 	get():
@@ -20,6 +21,8 @@ func _ready() -> void:
 	for i in max_sponges:
 		spongeHolder.add_child(get_new_sRect())
 	update_sponges(0)
+	
+	myGameOverMessage.hide()
 
 func get_new_sRect():
 	var r = TextureRect.new()
@@ -40,3 +43,19 @@ func update_sponges(a):
 			rect.modulate = Color(0.1, 0.1, 0.1, 1)
 		else:
 			rect.modulate = Color.WHITE
+			
+	if current_sponges == 0:
+		show_final_message()
+
+
+func show_final_message():
+	
+	var new_text = ""
+	new_text += "Thank you for playing \n this cool game by au and steph \n"
+	new_text += "Made for Perth Global Game Jam 2025 \n"
+	new_text += "Please see proj description \n for stock photo credits"
+	myGameOverMessage.mesh.text = new_text
+	myGameOverMessage.position = Vector3(-1,0,0)
+	
+	myGameOverMessage.show()
+	
