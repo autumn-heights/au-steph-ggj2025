@@ -64,19 +64,21 @@ func _ready() -> void:
 			"ms": move_speed = nDict[key]
 	move_speed *= 1 + randf_range(-0.1, 0.1)
 	print("walker move speed ", move_speed)
-var t = 0.0
+var approach_dist = 2.0
+var approach_speed = 0.2
+
 func _physics_process(delta: float) -> void:
 	if destination == null:
 		emit_signal("new_destination")##get a new spot to go to
 		return
-	velocity = position.direction_to(destination) * move_speed ##set velocity to the direction to this destination
-	if position.distance_to(destination)<= 0.3:
-		print("my destination has been reached")
+	var dist = position.distance_to(destination)
+	var c_speed = move_speed
+	velocity = position.direction_to(destination)
+	if dist<= 0.3:
+		#print("my destination has been reached")
 		destination = null
+		emit_signal("new_destination")
+	elif dist < approach_dist:
+		c_speed = lerp(approach_speed, move_speed, dist/approach_dist)
+	velocity *= c_speed ##set velocity to the direction to this destination
 	move_and_slide()
-
-func col_is_wall():
-	var hit = get_last_slide_collision()
-	for i in hit.get_collision_count():
-		if hit.get_collider(i).is_in_group("Wall"):
-			return hit.get_normal(i)

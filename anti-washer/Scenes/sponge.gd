@@ -45,16 +45,19 @@ func hit_something(collision : KinematicCollision3D):
 	for i in collision.get_collision_count():
 		var hit = collision.get_collider(i)
 		#print(hit)
-		if hit.is_in_group("Painting") && can_hit:
-			emit_signal("create_a_splatter",
-				collision.get_position(), 
-				collision.get_normal())
-			add_collision_exception_with(hit)
-			can_hit = false
-			if tween:
-				tween.kill
-			tween = get_tree().create_tween()
-			var r = rotation
-			r.y = PI/2
-			tween.tween_property(self, "rotation", r, 0.2)
-			tween.tween_callback(tween.kill)
+		if can_hit:
+			if hit.is_in_group("Painting"):
+				emit_signal("create_a_splatter",
+					collision.get_position(), 
+					collision.get_normal())
+				add_collision_exception_with(hit)
+				can_hit = false
+				if tween:
+					tween.kill
+				tween = get_tree().create_tween()
+				var r = rotation
+				r.y = PI/2
+				tween.tween_property(self, "rotation", r, 0.2)
+				tween.tween_callback(tween.kill)
+			elif hit.is_in_group("Walker"):
+				can_hit = false
