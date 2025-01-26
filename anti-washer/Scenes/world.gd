@@ -2,6 +2,7 @@ extends Node3D
 
 @onready var paintingScene = $PaintingScene
 @onready var menu = $Panel
+@onready var mySplatters = $PaintSplatters
 var possibleNames = [
   "Ethan B. Harrington",
   "Isla M. Donovan",

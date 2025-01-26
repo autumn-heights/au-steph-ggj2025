@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+signal create_a_splatter(collision_point, collision_normal)
+
 var throwHeight = 0.5
 var start = Vector3.ZERO
 var end = Vector3(1, 0, -1)
@@ -24,7 +26,7 @@ func _physics_process(delta: float) -> void:
 	if p < ttt:
 		p += delta
 		var r = p/ttt
-		print(sin(PI * r))
+		#print(sin(PI * r))
 		var h = sin(PI * r) * throwHeight
 		var des = start.lerp(end, r)
 		des.y += h
@@ -37,11 +39,14 @@ func _physics_process(delta: float) -> void:
 	if move_and_slide():
 		hit_something(get_last_slide_collision())
 
-func hit_something(thing : KinematicCollision3D):
-	for i in thing.get_collision_count():
-		var hit = thing.get_collider(i)
-		print(hit)
+func hit_something(collision : KinematicCollision3D):
+	for i in collision.get_collision_count():
+		var hit = collision.get_collider(i)
+		#print(hit)
 		if hit.is_in_group("Painting") && can_hit:
+			emit_signal("create_a_splatter",
+				collision.get_position(), 
+				collision.get_normal())
 			add_collision_exception_with(hit)
 			can_hit = false
 			if tween:

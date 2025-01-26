@@ -1,5 +1,7 @@
 extends StaticBody3D
 
+
+
 @onready var mySprite = $Sprite3D
 @onready var myCollider = $CollisionShape3D
 @onready var myPlaque = $MeshInstance3D
@@ -19,6 +21,9 @@ var myTitle = "title here":
 var myDescription = "desc here"
 var myOwner = "owner here"
 var myValue = 0
+
+func _ready():
+	set_tex()
 
 func setup(newDict) -> void:
 	print("setup called")
@@ -49,6 +54,3 @@ func set_tex(p = "res://icon.svg"):
 	spriteRect.size *= mySprite.pixel_size ## multiplies the shape size by the pixel density
 	shape.size = Vector3(spriteRect.size.x, spriteRect.size.y, 1) ## sets the shape to be the same size as the painting
 	myCollider.shape = shape ##sets the collider shape to be the new shape
-
-func _ready() -> void:
-	set_tex()

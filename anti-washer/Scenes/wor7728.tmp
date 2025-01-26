@@ -126,6 +126,7 @@ transform = Transform3D(0.595, 0, 0, 0, 0.595, 0, 0, 0, 0.595, -2.40161, -0.3532
 
 [node name="PaintSplatters" type="MultiMeshInstance3D" parent="."]
 script = ExtResource("6_dwmyi")
+max_splatters = null
 
 [connection signal="child_entered_tree" from="." to="PaintSplatters" method="_on_world_child_entered_tree"]
 

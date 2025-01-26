@@ -26,6 +26,7 @@ var can_throw = true
 
 func throw_sponge(start, end):
 	var new = sponge.instantiate(PackedScene.GEN_EDIT_STATE_DISABLED)
+	new.add_to_group("Sponge")
 	new.position = global_position
 	get_tree().get_root().add_child(new)
 	new.start = global_position

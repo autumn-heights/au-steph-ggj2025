@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://Scenes/player_manager.gd" id="1_0jxqh"]
 [ext_resource type="PackedScene" uid="uid://dneogfc76ji00" path="res://aimer.tscn" id="2_bb3jk"]
-[ext_resource type="Texture2D" uid="uid://d1x5exix0jkyc" path="res://Assets/Textures/Hands/400px-hand-idle.png" id="3_dy6tt"]
-[ext_resource type="Texture2D" uid="uid://quignstpxp3b" path="res://Assets/Textures/Hands/400px-hand-cocked.png" id="4_251qe"]
-[ext_resource type="Texture2D" uid="uid://bii8fvb55rv15" path="res://Assets/Textures/Hands/400px-hand-thrown.png" id="5_qcktl"]
+[ext_resource type="Texture2D" uid="uid://b4iv4y02e0exr" path="res://Assets/Textures/Hands/400px-hand-idle.png" id="3_dy6tt"]
+[ext_resource type="Texture2D" uid="uid://cbh6te20fugrg" path="res://Assets/Textures/Hands/400px-hand-cocked.png" id="4_251qe"]
+[ext_resource type="Texture2D" uid="uid://cvcuwawae8p2t" path="res://Assets/Textures/Hands/400px-hand-thrown.png" id="5_qcktl"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_urkx3"]
 animations = [{
