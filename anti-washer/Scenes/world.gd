@@ -38,6 +38,7 @@ var scene_size = Vector2(8,6)
 
 func _ready() -> void:
 	player_manager.thrown_sponge.connect(sponge_manager.update_sponges.bind(-1))
+	player_manager.sponges = max_sponges
 	sponge_manager.max_sponges = max_sponges
 	for walker in get_tree().get_nodes_in_group("Walker"):
 		walker.new_destination.connect(get_destination.bind(walker)) ## connects the new_destination signal

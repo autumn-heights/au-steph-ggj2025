@@ -248,6 +248,45 @@ tracks/8/keys = {
 "values": [Vector3(-0.8, -0.6, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_mthdu"]
+resource_name = "Ready"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.8, -1.2, 0), Vector3(-0.8, -0.6, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hand/SpongeMesh:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:state")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
 [sub_resource type="Animation" id="Animation_lx33y"]
 resource_name = "Reload"
 tracks/0/type = "value"
@@ -371,45 +410,6 @@ tracks/9/keys = {
 "values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_mthdu"]
-resource_name = "Ready"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Hand:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(-0.8, -1.2, 0), Vector3(-0.8, -0.6, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Hand/SpongeMesh:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:state")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.999),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0, 1]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xxwqx"]
 _data = {
 "Fire": SubResource("Animation_1ooay"),
@@ -518,7 +518,7 @@ sprite_frames = SubResource("SpriteFrames_tt32o")
 
 [node name="SpongeMesh" type="MeshInstance3D" parent="Hand"]
 process_priority = -1
-transform = Transform3D(0.0720526, -0.0129895, -0.130919, -0.127619, 0.0293653, -0.0731503, 0.0319643, 0.146523, 0.00305422, 0.279657, 0.16008, -0.14671)
+transform = Transform3D(0.0720526, -0.0129895, -0.130919, -0.127619, 0.0293656, -0.0731504, 0.0319646, 0.146523, 0.00305441, 0.279657, 0.16008, -0.14671)
 material_overlay = SubResource("ShaderMaterial_s4xe7")
 mesh = ExtResource("6_cmla1")
 skeleton = NodePath("../..")

@@ -39,7 +39,7 @@ func update_sponges(a):
 	spongeCountLabel.text = var_to_str(current_sponges) + " / " + var_to_str(max_sponges)
 	for i in max_sponges:
 		var rect = spongeHolder.get_child(i)
-		if i > current_sponges:
+		if i >= current_sponges:
 			rect.modulate = Color(0.1, 0.1, 0.1, 1)
 		else:
 			rect.modulate = Color.WHITE

@@ -26,6 +26,7 @@ func add_splatter(collision_point: Vector3, collision_normal: Vector3):
 	
 	# Position at collision point
 	splatter.global_position = collision_point
+	splatter.position.z += 0.2
 	
 	# Random rotation around Y-axis
 	splatter.rotation.y = randf_range(0, 2 * PI)

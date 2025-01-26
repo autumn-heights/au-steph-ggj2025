@@ -59,4 +59,4 @@ func set_tex(p = "res://icon.svg"):
 	spriteRect.size *= Vector2(mySprite.scale.x, mySprite.scale.y)
 	shape.size = Vector3(spriteRect.size.x, spriteRect.size.y, 1) ## sets the shape to be the same size as the painting
 	myCollider.shape = shape ##sets the collider shape to be the new shape
-	
+	myCollider.position.z = -shape.size.z/2

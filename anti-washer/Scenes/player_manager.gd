@@ -20,6 +20,7 @@ var botHPos = Vector3(-0.8, -1.2, 0)
 var cooldownTimer = 0.0
 const COOLDOWN = 0.4
 signal thrown_sponge
+var sponges = 0
 
 func _ready() -> void:
 	cooldownTimer = COOLDOWN
@@ -41,11 +42,13 @@ func _physics_process(delta: float) -> void:
 	if !hit.is_empty():
 		hitMarker.visible = true
 		hitMarker.position = hit.position
+		hitMarker.position.z += 0.06
 		lastHit = hit
 	else:
 		hitMarker.visible = false
 
 func throw_sponge():
+	sponges -= 1
 	var new = sponge.instantiate(PackedScene.GEN_EDIT_STATE_DISABLED)
 	new.add_to_group("Sponge")
 	new.position = global_position
@@ -59,7 +62,7 @@ func throw_sponge():
 	emit_signal("thrown_sponge")
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("throw"):
+	if event.is_action_pressed("throw") && sponges > 0:
 		if !can_throw || state == STATES.Idle: return
 		animHandler.play("Fire", -1, 2.0)
 	#elif event.is_action("aimhands") && !animHandler.is_playing():
