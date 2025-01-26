@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://jjyexa5gehjx"]
+[gd_scene load_steps=14 format=3 uid="uid://jjyexa5gehjx"]
 
 [ext_resource type="Script" path="res://Scenes/world.gd" id="1_8yon7"]
 [ext_resource type="PackedScene" uid="uid://c2captk44cbs3" path="res://Scenes/painting_scene.tscn" id="1_tplak"]
@@ -26,12 +26,6 @@ size = Vector2(8, 6)
 [sub_resource type="BoxShape3D" id="BoxShape3D_ypamk"]
 size = Vector3(8, 1, 6)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2fued"]
-albedo_color = Color(0, 0, 0, 1)
-
-[sub_resource type="TextMesh" id="TextMesh_uaqj7"]
-horizontal_alignment = 0
-
 [node name="World" type="Node3D"]
 script = ExtResource("1_8yon7")
 
@@ -40,19 +34,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.8)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.912299, -0.197797, 0.35859, 0, 0.875625, 0.482992, -0.409525, -0.440633, 0.798832, 0, 0, 0)
-
-[node name="Panel" type="Panel" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="PaintingWall" type="StaticBody3D" parent="." groups=["Wall"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.5)
@@ -128,10 +109,31 @@ shape = SubResource("BoxShape3D_ypamk")
 [node name="Camera3D" parent="CanvasLayer/SubViewportContainer/SubViewport" index="0"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -2.99491, -2.63563)
 
-[node name="GameOverMessage" type="MeshInstance3D" parent="CanvasLayer/SpongeManager"]
-material_override = SubResource("StandardMaterial3D_2fued")
-mesh = SubResource("TextMesh_uaqj7")
-skeleton = NodePath("../../..")
+[node name="GameOverMessage" type="PanelContainer" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -193.0
+offset_top = -63.5
+offset_right = 193.0
+offset_bottom = 63.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/GameOverMessage"]
+layout_mode = 2
+text = "Thank you for playing this cool game by 
+au and steph
+Made for Perth Global Game Jam 2025
+
+Please see proj description for stock photo credits"
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="Walker" parent="." instance=ExtResource("5_r2c3f")]
 transform = Transform3D(0.595, 0, 0, 0, 0.595, 0, 0, 0, 0.595, -2.40161, -0.35322, -0.597205)

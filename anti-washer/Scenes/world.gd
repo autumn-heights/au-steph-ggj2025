@@ -1,11 +1,11 @@
 extends Node3D
 
 @onready var paintingScene = $PaintingScene
-@onready var menu = $Panel
+@onready var menu = $CanvasLayer/Panel
 @onready var mySplatters = $PaintSplatters
 @onready var sponge_manager = $CanvasLayer/SpongeManager
 @onready var player_manager = $PlayerManager
-
+@onready var gameover_message = $CanvasLayer/GameOverMessage
 @onready var walker_scene = preload("res://Scenes/walker.tscn")
 var possibleNames = [
   "Ethan B. Harrington",
@@ -40,6 +40,7 @@ func _ready() -> void:
 	player_manager.thrown_sponge.connect(sponge_manager.update_sponges.bind(-1))
 	player_manager.sponges = max_sponges
 	sponge_manager.max_sponges = max_sponges
+	sponge_manager.myGameOverMessage = gameover_message
 	for walker in get_tree().get_nodes_in_group("Walker"):
 		walker.new_destination.connect(get_destination.bind(walker)) ## connects the new_destination signal
 		# from walker nodes in scene tree to the get_destination function

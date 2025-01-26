@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://d14rirh123qpt"]
 
-[ext_resource type="PackedScene" uid="uid://2sug7w3bcena" path="res://Assets/Meshes/Sponge.glb" id="1_fw77d"]
+[ext_resource type="PackedScene" uid="uid://cxl2lxqup6262" path="res://Assets/Meshes/Sponge.glb" id="1_fw77d"]
 [ext_resource type="Script" path="res://Scenes/sponge.gd" id="2_4pckh"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yw11t"]
