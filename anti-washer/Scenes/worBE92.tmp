@@ -1,0 +1,135 @@
+[gd_scene load_steps=14 format=3 uid="uid://jjyexa5gehjx"]
+
+[ext_resource type="Script" path="res://Scenes/world.gd" id="1_8yon7"]
+[ext_resource type="PackedScene" uid="uid://c2captk44cbs3" path="res://Scenes/painting_scene.tscn" id="1_tplak"]
+[ext_resource type="PackedScene" path="res://Scenes/sponge_manager.tscn" id="4_xeb68"]
+[ext_resource type="PackedScene" uid="uid://dria1p7lv211k" path="res://DebugCamera.tscn" id="5_ay0nb"]
+[ext_resource type="PackedScene" uid="uid://cftdclwg8sf6p" path="res://Scenes/walker.tscn" id="5_r2c3f"]
+[ext_resource type="Script" path="res://Scenes/paint_splatter.gd" id="6_dwmyi"]
+[ext_resource type="PackedScene" path="res://Scenes/player_manager.tscn" id="7_yxq52"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w6fjv"]
+size = Vector3(8, 2, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_211je"]
+size = Vector2(8, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j2kto"]
+size = Vector3(6, 2, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_0o8by"]
+size = Vector2(6, 2)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_b4u2n"]
+size = Vector2(8, 6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ypamk"]
+size = Vector3(8, 1, 6)
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_8yon7")
+
+[node name="PaintingScene" parent="." instance=ExtResource("1_tplak")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.8)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.912299, -0.197797, 0.35859, 0, 0.875625, 0.482992, -0.409525, -0.440633, 0.798832, 0, 0, 0)
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PaintingWall" type="StaticBody3D" parent="." groups=["Wall"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.5)
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PaintingWall"]
+shape = SubResource("BoxShape3D_w6fjv")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="PaintingWall"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.5)
+mesh = SubResource("PlaneMesh_211je")
+skeleton = NodePath("../..")
+
+[node name="Wall" type="StaticBody3D" parent="." groups=["Wall"]]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 3.5)
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall"]
+shape = SubResource("BoxShape3D_w6fjv")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Wall"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.5)
+mesh = SubResource("PlaneMesh_211je")
+skeleton = NodePath("../..")
+
+[node name="WallR" type="StaticBody3D" parent="." groups=["Wall"]]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.5, 0, 0)
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WallR"]
+shape = SubResource("BoxShape3D_j2kto")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="WallR"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.5)
+mesh = SubResource("PlaneMesh_0o8by")
+skeleton = NodePath("../..")
+
+[node name="WallL" type="StaticBody3D" parent="." groups=["Wall"]]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.5, 0, 0)
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WallL"]
+shape = SubResource("BoxShape3D_j2kto")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="WallL"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.5)
+mesh = SubResource("PlaneMesh_0o8by")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.91847, 0)
+collision_layer = 7
+collision_mask = 7
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("PlaneMesh_b4u2n")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_ypamk")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="SubViewportContainer" parent="CanvasLayer" instance=ExtResource("5_ay0nb")]
+
+[node name="Camera3D" parent="CanvasLayer/SubViewportContainer/SubViewport" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.0137004, 0.999906, 0, -0.999906, 0.0137004, 0, 4.67511, 0)
+
+[node name="SpongeManager" parent="CanvasLayer" instance=ExtResource("4_xeb68")]
+
+[node name="Walker" parent="." instance=ExtResource("5_r2c3f")]
+transform = Transform3D(0.595, 0, 0, 0, 0.595, 0, 0, 0, 0.595, -2.40161, -0.35322, -0.597205)
+
+[node name="PaintSplatters" type="MultiMeshInstance3D" parent="."]
+script = ExtResource("6_dwmyi")
+
+[node name="PlayerManager" parent="." instance=ExtResource("7_yxq52")]
+
+[connection signal="child_entered_tree" from="." to="PaintSplatters" method="_on_world_child_entered_tree"]
+
+[editable path="CanvasLayer/SubViewportContainer"]

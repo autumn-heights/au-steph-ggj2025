@@ -1,11 +1,20 @@
 extends Node3D
 
 @export_file("*.glb") var splatter_mesh_path = 'res://Assets/Meshes/PaintSplatter1.glb'
+#@export var splatter_mesh_path = 'res://Assets/Meshes/PaintSplatter1_Mesh.res'
 @export var max_splatters: int = 50
 
-var splatters: Array[Node3D] = []
+@export var splatter : MeshInstance3D 
+
+var splatters: Array[MeshInstance3D] = []
 
 var SPLATTER_SCALE_FACTOR = 0.2
+
+var SPLATTER_POSSIBLE_COLORS = [
+	Color(1, 0, 0), # Red
+	Color(0, 1, 0), # Green
+	Color(0, 0, 1)  # Blue
+]
 
 func _ready():
 	# Preload the mesh scene
@@ -18,7 +27,7 @@ func add_splatter(collision_point: Vector3, collision_normal: Vector3):
 		var oldest_splatter = splatters.pop_front()
 		oldest_splatter.queue_free()
 	
-	var splatter = splatter_mesh_path.instantiate()
+	splatter = splatter_mesh_path.instantiate()
 	add_child(splatter)
 	
 	# Position at collision point
@@ -34,6 +43,17 @@ func add_splatter(collision_point: Vector3, collision_normal: Vector3):
 	# Align to surface normal, facing away from surface
 	splatter.look_at(collision_point - collision_normal)
 	splatter.rotation.x = -PI/2
+	
+	# Randomly select a primary color
+	var random_color = SPLATTER_POSSIBLE_COLORS[randi() % SPLATTER_POSSIBLE_COLORS.size()]
+	#print(splatter)
+	#print(splatter.get_surface_override_material())
+	#if splatter is MeshInstance3D:
+		#print(splatter.mesh)
+		#var material = splatter.mesh.surface_get_material(0)
+		#print(material)
+		#if material:
+			#material.albedo_color = random_color
 	
 	splatters.append(splatter)
 
