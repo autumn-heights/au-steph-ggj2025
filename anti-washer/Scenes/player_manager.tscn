@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cux68v5cosdhy"]
+[gd_scene load_steps=21 format=3 uid="uid://cux68v5cosdhy"]
 
 [ext_resource type="Script" path="res://Scenes/player_manager.gd" id="1_0jxqh"]
 [ext_resource type="PackedScene" uid="uid://dneogfc76ji00" path="res://aimer.tscn" id="2_bb3jk"]
@@ -10,6 +10,7 @@
 [ext_resource type="ArrayMesh" uid="uid://c1iutrs5g561" path="res://Assets/Meshes/Sponge_Mesh.res" id="6_cmla1"]
 [ext_resource type="Texture2D" uid="uid://dx7co5udmns7l" path="res://Assets/Textures/Hands/ATLAS_400px-hand-idle.png" id="6_hw5r2"]
 [ext_resource type="Texture2D" uid="uid://d3wr88s1sc3je" path="res://Assets/Textures/Hands/ATLAS_400px-hand-cocked.png" id="8_0nedy"]
+[ext_resource type="Texture2D" uid="uid://bqutdb8udaa3v" path="res://Assets/Textures/Hands/ATLAS-400px-hand-followthrough.png" id="9_vbqn2"]
 
 [sub_resource type="Animation" id="Animation_1ooay"]
 resource_name = "Fire"
@@ -208,6 +209,18 @@ tracks/7/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Hand:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.8, -0.6, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_lx33y"]
 resource_name = "Reload"
@@ -254,10 +267,70 @@ tracks/3/path = NodePath("Hand/SpongeMesh:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.4, 1),
+"times": PackedFloat32Array(0, 0.1998, 1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Hand/BaseHand:animation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"reload"]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Hand/BaseHand:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.1665),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Hand/HandOverlay:animation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"reload"]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Hand/HandOverlay:frame")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.1665),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Hand:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3996),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.8, -0.6, 0), Vector3(-0.8, -1.3878, 0), Vector3(-0.8, -0.6, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xxwqx"]
@@ -299,6 +372,10 @@ animations = [{
 atlas = ExtResource("8_0nedy")
 region = Rect2(0, 0, 290, 400)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_1y0ds"]
+atlas = ExtResource("9_vbqn2")
+region = Rect2(0, 0, 278, 400)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_tt32o"]
 animations = [{
 "frames": [{
@@ -316,6 +393,9 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1y0ds")
+}, {
 "duration": 1.0,
 "texture": ExtResource("6_hw5r2")
 }],
@@ -347,12 +427,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, -0.6, 0)
 
 [node name="BaseHand" type="AnimatedSprite3D" parent="Hand"]
 pixel_size = 0.002
+texture_filter = 0
 render_priority = -1
 sprite_frames = SubResource("SpriteFrames_urkx3")
 
 [node name="HandOverlay" type="AnimatedSprite3D" parent="Hand"]
 process_priority = 2
 pixel_size = 0.002
+texture_filter = 0
 render_priority = 1
 sprite_frames = SubResource("SpriteFrames_tt32o")
 

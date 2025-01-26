@@ -56,8 +56,10 @@ func animate_hands(raising):
 		npos = botHPos
 		nt = lower_time
 		ns = STATES.Idle
+	tween.tween_property(sponge_mesh, "visible", raising, 0.0)
 	tween.tween_property(playerHands, "position", npos, nt)
 	tween.tween_property(self, "state", ns, 0.0)
+	
 	tween.tween_callback(tween.kill)
 
 func raycast():
