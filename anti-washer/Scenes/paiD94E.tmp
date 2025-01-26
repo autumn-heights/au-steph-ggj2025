@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2captk44cbs3"]
+
+[ext_resource type="Script" path="res://Scenes/painting_scene.gd" id="1_bh3of"]
+[ext_resource type="Texture2D" uid="uid://27tohnahv8n0" path="res://icon.svg" id="1_i11x3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hfj2q"]
+size = Vector3(1, 1, 0.367676)
+
+[sub_resource type="TextMesh" id="TextMesh_4x1rc"]
+
+[node name="PaintingScene" type="StaticBody3D" groups=["Painting"]]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_bh3of")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture = ExtResource("1_i11x3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.183838)
+shape = SubResource("BoxShape3D_hfj2q")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("TextMesh_4x1rc")
