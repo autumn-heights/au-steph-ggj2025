@@ -7,6 +7,7 @@ var start = Vector3.ZERO
 var end = Vector3(1, 0, -1)
 var p = 0.0 ## progress
 var ttt = 1.0 #time to target
+var slip_time = 0.4
 var grav = -9.8
 var spinSpeed = 0.3
 var minSpin = 0.5
@@ -20,6 +21,7 @@ func _ready() -> void:
 	rotation.x += lerp(-PI/4, PI/4, x)
 	spinSpeed = lerp(minSpin, maxSpin, x)
 	rotation.z += randf_range(-PI/4, PI/4)
+
 var tween : Tween
 
 func _physics_process(delta: float) -> void:

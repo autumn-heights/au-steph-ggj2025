@@ -8,7 +8,7 @@ size = Vector3(0.951212, 1.9, 0.546387)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gex4d"]
 
-[node name="Walker" type="CharacterBody3D"]
+[node name="Walker" type="CharacterBody3D" groups=["Walker"]]
 collision_layer = 4
 collision_mask = 4
 script = ExtResource("1_uhm6l")

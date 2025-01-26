@@ -2,8 +2,8 @@ extends CharacterBody3D
 
 @onready var mySprite = $Sprite3D
 @onready var myCollider = $HitArea/CollisionShape3D
-
-var desired_direction = Vector3.FORWARD
+signal new_destination
+var destination
 var tween : Tween
 var sprite_path = "res://Assets/Textures/Walking People/"
 var characteristic_list = [
@@ -50,9 +50,9 @@ var rotationVar = 0.3
 var move_speed = 0.5
 
 func _ready() -> void:
-	desired_direction = desired_direction.rotated(Vector3.UP, randf()* PI).normalized()
 	var nDict
-	if randf()>bikemanChance:
+	if randf() < bikemanChance:
+		print("im bikeman!")
 		nDict = bikemanDict
 	else:
 		nDict = characteristic_list[randi() % (characteristic_list.size() - 1)]
@@ -65,16 +65,12 @@ func _ready() -> void:
 	move_speed *= 1 + randf_range(-0.1, 0.1)
 var t = 0.0
 func _physics_process(delta: float) -> void:
-	velocity = desired_direction * move_speed
-	if move_and_slide():
-		var norm = col_is_wall()
-		if norm != null:
-			if tween: tween.kill()
-			tween = get_tree().create_tween()
-			norm = norm.rotated(Vector3.UP, randf_range(-rotationVar, rotationVar))
-			desired_direction = norm
-			tween.tween_property(self, "t", 1.0, 0.4)
-			tween.tween_callback(tween.kill)
+	if destination == null:
+		emit_signal("new_destination")##get a new spot to go to
+		return
+	velocity = position.direction_to(destination) * move_speed ##set velocity to the direction to this destination
+	if position.distance_to(destination)<= 0.3:
+		destination = null
 
 func col_is_wall():
 	var hit = get_last_slide_collision()

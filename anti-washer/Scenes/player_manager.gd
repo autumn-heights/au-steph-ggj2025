@@ -3,15 +3,17 @@ extends Node3D
 const RAY_LENGTH = 100
 @onready var hitMarker = $Aimer
 @onready var sponge = preload("res://Scenes/sponge.tscn")
-@onready var playerHands = $AnimatedSprite3D
+@onready var playerHands = $Hand
+@onready var sponge_mesh = $Hand/SpongeMesh
 var lastHit
 var tween : Tween
 var state: STATES = STATES.Idle
 enum STATES {Idle, Aiming}
 var raise_time = 0.3
 var lower_time = 0.3
-var topHPos = Vector3(-0.814, -0.631, 0)
-var botHPos = Vector3(-0.814, -1.2, 0.042)
+var topHPos = Vector3(-0.8, -0.6, 0)
+var botHPos = Vector3(-0.8, -1.2, 0)
+signal thrown_sponge
 
 func _physics_process(delta: float) -> void:
 	var hit = raycast()
@@ -28,9 +30,12 @@ func throw_sponge(start, end):
 	var new = sponge.instantiate(PackedScene.GEN_EDIT_STATE_DISABLED)
 	new.add_to_group("Sponge")
 	new.position = global_position
+	new.position = sponge_mesh.global_position
+	new.rotation = sponge_mesh.global_rotation
 	get_tree().get_root().add_child(new)
-	new.start = global_position
+	new.start = sponge_mesh.global_position
 	new.end = end
+	emit_signal("thrown_sponge")
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("throw"):
@@ -54,8 +59,10 @@ func animate_hands(raising):
 		npos = botHPos
 		nt = lower_time
 		ns = STATES.Idle
+	tween.tween_property(sponge_mesh, "visible", raising, 0.0)
 	tween.tween_property(playerHands, "position", npos, nt)
 	tween.tween_property(self, "state", ns, 0.0)
+	
 	tween.tween_callback(tween.kill)
 
 func raycast():
