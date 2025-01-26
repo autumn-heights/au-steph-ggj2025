@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://jjyexa5gehjx"]
+[gd_scene load_steps=13 format=3 uid="uid://jjyexa5gehjx"]
 
 [ext_resource type="Script" path="res://Scenes/world.gd" id="1_8yon7"]
 [ext_resource type="PackedScene" uid="uid://c2captk44cbs3" path="res://Scenes/painting_scene.tscn" id="1_tplak"]
+[ext_resource type="PackedScene" uid="uid://kpstv5jh7buj" path="res://Scenes/sponge_manager.tscn" id="4_xeb68"]
 [ext_resource type="PackedScene" uid="uid://dria1p7lv211k" path="res://DebugCamera.tscn" id="5_ay0nb"]
 [ext_resource type="PackedScene" uid="uid://cux68v5cosdhy" path="res://Scenes/player_manager.tscn" id="5_h7dhg"]
 [ext_resource type="PackedScene" uid="uid://cftdclwg8sf6p" path="res://Scenes/walker.tscn" id="5_r2c3f"]
@@ -117,6 +118,8 @@ shape = SubResource("BoxShape3D_ypamk")
 
 [node name="Camera3D" parent="CanvasLayer/SubViewportContainer/SubViewport" index="0"]
 transform = Transform3D(1, 0, 0, 0, 0.0137004, 0.999906, 0, -0.999906, 0.0137004, 0, 4.67511, 0)
+
+[node name="SpongeManager" parent="CanvasLayer" instance=ExtResource("4_xeb68")]
 
 [node name="Walker" parent="." instance=ExtResource("5_r2c3f")]
 transform = Transform3D(0.595, 0, 0, 0, 0.595, 0, 0, 0, 0.595, -2.40161, -0.35322, -0.597205)

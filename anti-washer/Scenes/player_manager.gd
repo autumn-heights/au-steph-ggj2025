@@ -13,7 +13,7 @@ var raise_time = 0.3
 var lower_time = 0.3
 var topHPos = Vector3(-0.8, -0.6, 0)
 var botHPos = Vector3(-0.8, -1.2, 0)
-
+signal thrown_sponge
 
 func _physics_process(delta: float) -> void:
 	var hit = raycast()
@@ -33,6 +33,7 @@ func throw_sponge(start, end):
 	get_tree().get_root().add_child(new)
 	new.start = sponge_mesh.global_position
 	new.end = end
+	emit_signal("thrown_sponge")
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("throw"):

@@ -2,6 +2,7 @@ extends Node3D
 
 @onready var paintingScene = $PaintingScene
 @onready var menu = $Panel
+@onready var sponge_manager = $CanvasLayer/SpongeManager
 
 @onready var walker_scene = preload("res://Scenes/walker.tscn")
 var possibleNames = [
@@ -27,9 +28,13 @@ var possibleNames = [
   "Victoria N. Harrison"
 ]
 
+var max_sponges = 10
+
+
 var possiblePaintingParams = readJSON("res://Assets/art-notes.json")
 var scene_size = Vector2(6, 8)
 func _ready() -> void:
+	sponge_manager.max_sponges = max_sponges
 	for walker in get_tree().get_nodes_in_group("Walker"):
 		walker.new_destination.connect(get_destination.bind(walker)) ## connects the new_destination signal
 		# from walker nodes in scene tree to the get_destination function
