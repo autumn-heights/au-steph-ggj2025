@@ -4,6 +4,7 @@ extends Node3D
 @onready var menu = $Panel
 @onready var mySplatters = $PaintSplatters
 @onready var sponge_manager = $CanvasLayer/SpongeManager
+@onready var player_manager = $PlayerManager
 
 @onready var walker_scene = preload("res://Scenes/walker.tscn")
 var possibleNames = [
@@ -34,7 +35,9 @@ var max_sponges = 10
 
 var possiblePaintingParams = readJSON("res://Assets/art-notes.json")
 var scene_size = Vector2(8,6)
+
 func _ready() -> void:
+	player_manager.thrown_sponge.connect(sponge_manager.update_sponges.bind(-1))
 	sponge_manager.max_sponges = max_sponges
 	for walker in get_tree().get_nodes_in_group("Walker"):
 		walker.new_destination.connect(get_destination.bind(walker)) ## connects the new_destination signal
@@ -82,7 +85,6 @@ func init_random_painting(scene):
 	var dict = possiblePaintingParams.pop_at(randi() % (possiblePaintingParams.size()-1))
 	print(dict)
 	scene.setup(dict)
-
 
 func readJSON(json_file_path):
 	# stolen from reddit

@@ -23,6 +23,7 @@ signal thrown_sponge
 
 func _ready() -> void:
 	cooldownTimer = COOLDOWN
+	animHandler.play("Ready")
 
 func _process(delta: float) -> void:
 	if !can_throw:
@@ -30,7 +31,11 @@ func _process(delta: float) -> void:
 			cooldownTimer += delta
 		elif !animHandler.is_playing():
 			animHandler.play("Reload")
-
+	if !animHandler.is_playing():
+		if Input.is_action_just_pressed("aimhands") && state == STATES.Idle:
+			animHandler.play("Ready", -1, 1.2)
+		elif Input.is_action_just_released("aimhands") && state == STATES.Aiming:
+			animHandler.play_backwards("Ready")
 func _physics_process(delta: float) -> void:
 	var hit = raycast()
 	if !hit.is_empty():
@@ -56,12 +61,12 @@ func throw_sponge():
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("throw"):
 		if !can_throw || state == STATES.Idle: return
-		animHandler.play("Fire")
-	elif event.is_action("aimhands") && !animHandler.is_playing():
-		if event.is_action_pressed("aimhands"):
-			animHandler.play("Ready")
-		elif event.is_action_released("aimhands"):
-			animHandler.play_backwards("Ready")
+		animHandler.play("Fire", -1, 2.0)
+	#elif event.is_action("aimhands") && !animHandler.is_playing():
+		#if event.is_action_pressed("aimhands"):
+			#animHandler.play("Ready")
+		#elif event.is_action_released("aimhands"):
+			#animHandler.play_backwards("Ready")
 
 func raycast():
 	var space_state = get_world_3d().direct_space_state
