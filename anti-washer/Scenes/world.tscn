@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://Scenes/world.gd" id="1_8yon7"]
 [ext_resource type="PackedScene" uid="uid://c2captk44cbs3" path="res://Scenes/painting_scene.tscn" id="1_tplak"]
-[ext_resource type="PackedScene" path="res://Scenes/sponge_manager.tscn" id="4_xeb68"]
+[ext_resource type="PackedScene" uid="uid://kpstv5jh7buj" path="res://Scenes/sponge_manager.tscn" id="4_xeb68"]
 [ext_resource type="PackedScene" uid="uid://dria1p7lv211k" path="res://DebugCamera.tscn" id="5_ay0nb"]
 [ext_resource type="PackedScene" uid="uid://cftdclwg8sf6p" path="res://Scenes/walker.tscn" id="5_r2c3f"]
 [ext_resource type="Script" path="res://Scenes/paint_splatter.gd" id="6_dwmyi"]
-[ext_resource type="PackedScene" path="res://Scenes/player_manager.tscn" id="7_yxq52"]
+[ext_resource type="PackedScene" uid="uid://cux68v5cosdhy" path="res://Scenes/player_manager.tscn" id="7_yxq52"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_w6fjv"]
 size = Vector3(8, 2, 1)

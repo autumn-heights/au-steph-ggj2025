@@ -4,7 +4,7 @@ var max_sponges = 10
 var current_sponges
 @onready var spongeHolder = $VBoxContainer/HBoxContainer
 @onready var spongeCountLabel = $VBoxContainer/Label
-var spongeTexPath
+var spongeTexPath = "res://Assets/Textures/Sponge-pixart.png"
 var spongeTex: 
 	get():
 		if spongeTexPath == null:
@@ -19,12 +19,15 @@ func _ready() -> void:
 		spongeHolder.get_child(i).queue_free()
 	for i in max_sponges:
 		spongeHolder.add_child(get_new_sRect())
-		
+	update_sponges(0)
 
 func get_new_sRect():
 	var r = TextureRect.new()
 	r.texture = load(spongeTex)
-	r.custom_minimum_size = Vector2(48,48)
+	r.custom_minimum_size = Vector2(48, 48)
+	r.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	r.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	r.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	return r
 
 func update_sponges(a):
@@ -33,8 +36,6 @@ func update_sponges(a):
 	spongeCountLabel.text = var_to_str(current_sponges) + " / " + var_to_str(max_sponges)
 	for i in max_sponges:
 		var rect = spongeHolder.get_child(i)
-		if i > spongeHolder.get_child_count():
-			spongeHolder.add_child(get_new_sRect())
 		if i > current_sponges:
 			rect.modulate = Color(0.1, 0.1, 0.1, 1)
 		else:

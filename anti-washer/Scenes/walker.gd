@@ -47,7 +47,7 @@ var bikemanDict = {
 	}
 
 var rotationVar = 0.3
-var move_speed = 0.5
+var move_speed = 2
 
 func _ready() -> void:
 	var nDict
@@ -63,6 +63,7 @@ func _ready() -> void:
 			"shapePos": myCollider.position = nDict[key]
 			"ms": move_speed = nDict[key]
 	move_speed *= 1 + randf_range(-0.1, 0.1)
+	print("walker move speed ", move_speed)
 var t = 0.0
 func _physics_process(delta: float) -> void:
 	if destination == null:
@@ -70,7 +71,9 @@ func _physics_process(delta: float) -> void:
 		return
 	velocity = position.direction_to(destination) * move_speed ##set velocity to the direction to this destination
 	if position.distance_to(destination)<= 0.3:
+		print("my destination has been reached")
 		destination = null
+	move_and_slide()
 
 func col_is_wall():
 	var hit = get_last_slide_collision()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cux68v5cosdhy"]
+[gd_scene load_steps=22 format=3 uid="uid://cux68v5cosdhy"]
 
 [ext_resource type="Script" path="res://Scenes/player_manager.gd" id="1_0jxqh"]
 [ext_resource type="PackedScene" uid="uid://dneogfc76ji00" path="res://aimer.tscn" id="2_bb3jk"]
@@ -69,7 +69,7 @@ tracks/4/path = NodePath("Hand/BaseHand:frame")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(-0.0333, 0.7, 1),
+"times": PackedFloat32Array(-0.0333, 0.7, 0.9657),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [0, 1, 2]
@@ -81,7 +81,7 @@ tracks/5/path = NodePath("Hand/HandOverlay:frame")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.6993, 0.999),
+"times": PackedFloat32Array(0, 0.6993, 0.9657),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [0, 1, 2]
@@ -109,6 +109,32 @@ tracks/7/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
+}
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath(".")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.999),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"throw_sponge"
+}]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Hand:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.8, -0.6, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_661k4"]
@@ -332,11 +358,63 @@ tracks/8/keys = {
 "update": 0,
 "values": [Vector3(-0.8, -0.6, 0), Vector3(-0.8, -1.3878, 0), Vector3(-0.8, -0.6, 0)]
 }
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath(".:can_throw")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0.999),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_mthdu"]
+resource_name = "Ready"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.8, -1.2, 0), Vector3(-0.8, -0.6, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hand/SpongeMesh:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:state")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xxwqx"]
 _data = {
 "Fire": SubResource("Animation_1ooay"),
 "RESET": SubResource("Animation_661k4"),
+"Ready": SubResource("Animation_mthdu"),
 "Reload": SubResource("Animation_lx33y")
 }
 
